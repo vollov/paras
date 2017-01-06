@@ -1,53 +1,53 @@
 'use strict';
 
-angular.module('ocblApp', ['ui.router', 'auth'])
-.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+angular.module('ocblApp', ['ui.router', 'auth', 'page'])
+.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'PageCtrl', function($stateProvider, $urlRouterProvider, $httpProvider, PageCtrl) {
 	$stateProvider.state('home', {
 		url : '/home',
 		templateUrl : 'views/home.html',
-		controller : 'PageCtrl',
+		controller : PageCtrl,
 		controllerAs: 'vm',
 		data:{
 			requireLogin: false
 		}
 		//controller : 'MainCtrl'
-	})
-	.state('rules', {
-		url : '/rules',
-		templateUrl : 'views/rules.html',
-		controller : 'PageCtrl',
-		controllerAs: 'vm',
-		data:{
-			requireLogin: false
-		}
-	})
-	.state('terms', {
-		url : '/terms',
-		templateUrl : 'views/terms.html',
-		controller : 'PageCtrl',
-		controllerAs: 'vm',
-		data:{
-			requireLogin: false
-		}
-	})
-	.state('privacy', {
-		url : '/privacy',
-		templateUrl : 'views/privacy.html',
-		controller : 'PageCtrl',
-		controllerAs: 'vm',
-		data:{
-			requireLogin: false
-		}
-	})
-	.state('contacts', {
-		url : '/contacts',
-		templateUrl : 'views/contacts.html',
-		controller : 'PageCtrl',
-		controllerAs: 'vm',
-		data:{
-			requireLogin: false
-		}
 	});
+//	.state('rules', {
+//		url : '/rules',
+//		templateUrl : 'views/rules.html',
+//		controller : 'PageCtrl',
+//		controllerAs: 'vm',
+//		data:{
+//			requireLogin: false
+//		}
+//	})
+//	.state('terms', {
+//		url : '/terms',
+//		templateUrl : 'views/terms.html',
+//		controller : 'PageCtrl',
+//		controllerAs: 'vm',
+//		data:{
+//			requireLogin: false
+//		}
+//	})
+//	.state('privacy', {
+//		url : '/privacy',
+//		templateUrl : 'views/privacy.html',
+//		controller : 'PageCtrl',
+//		controllerAs: 'vm',
+//		data:{
+//			requireLogin: false
+//		}
+//	})
+//	.state('contacts', {
+//		url : '/contacts',
+//		templateUrl : 'views/contacts.html',
+//		controller : 'PageCtrl',
+//		controllerAs: 'vm',
+//		data:{
+//			requireLogin: false
+//		}
+//	});
   $urlRouterProvider.otherwise('home');
 }])
 .run(['$rootScope','$state','$http', 'AuthService',function ($rootScope,$state,$http,AuthService) {
