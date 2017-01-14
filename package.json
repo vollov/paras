@@ -1,8 +1,9 @@
 {
-  "name": "ocbl.ca restful front end",
+  "name": "ocbl-restful-front-end",
   "version": "1.0.0",
   "scripts": {
-      "test": "karma start karma.conf.js $*"
+    "start": "node dev.ocbl.ca.3011.js",
+    "test": "karma start karma.conf.js $*"
   },
   "devDependencies": {
     "gulp": "*",
@@ -15,5 +16,11 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "serve-favicon": "^2.3.2"
   }
 }
