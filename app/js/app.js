@@ -1,55 +1,60 @@
 'use strict';
 
-angular.module('ocblApp', ['ui.router', 'auth', 'page'])
-.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', 'PageCtrl', function($stateProvider, $urlRouterProvider, $httpProvider, PageCtrl) {
+angular.module('ocblApp', ['ui.router', 'hc.marked', 'auth', 'page'])
+.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 	$stateProvider.state('home', {
 		url : '/home',
 		templateUrl : 'views/home.html',
-		controller : PageCtrl,
+		controller : 'PageCtrl',
 		controllerAs: 'vm',
 		data:{
 			requireLogin: false
 		}
-		//controller : 'MainCtrl'
+	})
+	.state('rules', {
+		url : '/rules',
+		templateUrl : 'views/rules.html',
+		controller : 'PageCtrl',
+		controllerAs: 'vm',
+		data:{
+			requireLogin: false
+		}
+	})
+	.state('terms', {
+		url : '/terms',
+		templateUrl : 'views/terms.html',
+		controller : 'PageCtrl',
+		controllerAs: 'vm',
+		data:{
+			requireLogin: false
+		}
+	})
+	.state('privacy', {
+		url : '/privacy',
+		templateUrl : 'views/privacy.html',
+		controller : 'PageCtrl',
+		controllerAs: 'vm',
+		data:{
+			requireLogin: false
+		}
+	})
+	.state('contacts', {
+		url : '/contacts',
+		templateUrl : 'views/contacts.html',
+		controller : 'PageCtrl',
+		controllerAs: 'vm',
+		data:{
+			requireLogin: false
+		}
 	});
-//	.state('rules', {
-//		url : '/rules',
-//		templateUrl : 'views/rules.html',
-//		controller : 'PageCtrl',
-//		controllerAs: 'vm',
-//		data:{
-//			requireLogin: false
-//		}
-//	})
-//	.state('terms', {
-//		url : '/terms',
-//		templateUrl : 'views/terms.html',
-//		controller : 'PageCtrl',
-//		controllerAs: 'vm',
-//		data:{
-//			requireLogin: false
-//		}
-//	})
-//	.state('privacy', {
-//		url : '/privacy',
-//		templateUrl : 'views/privacy.html',
-//		controller : 'PageCtrl',
-//		controllerAs: 'vm',
-//		data:{
-//			requireLogin: false
-//		}
-//	})
-//	.state('contacts', {
-//		url : '/contacts',
-//		templateUrl : 'views/contacts.html',
-//		controller : 'PageCtrl',
-//		controllerAs: 'vm',
-//		data:{
-//			requireLogin: false
-//		}
-//	});
   $urlRouterProvider.otherwise('home');
 }])
+.config(['markedProvider', function (markedProvider) {
+	markedProvider.setOptions({
+		gfm: true,
+		tables: true
+	})
+}])	
 .run(['$rootScope','$state','$http', 'AuthService',function ($rootScope,$state,$http,AuthService) {
 	// Update xsrf $http headers to align with Django's defaults
 	$http.defaults.xsrfHeaderName = 'X-CSRFToken';

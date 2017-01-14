@@ -6,25 +6,27 @@ angular.module('page.controllers', ['page.services'])
 	
 	var currentState = $state.current.name;
 	console.log('PageCtrl currentState=' + currentState);
-	//activate();
+	activate(currentState);
 	
 	// initialize objects in view when loading
-//	function activate(){
-//		console.log('PageCtrl.activate() get page name=' + $stateParams.name);
-//		
-//		return PageService.get($stateParams.name).then(registerSuccessFn, registerErrorFn);
-//
-//		function registerSuccessFn(data, status, headers, config) {
-//			// parse the block from page object
-//			var page = data.data;
-//			
-//			console.log('get returned data from get(), page=%j', page);
-//		}
-//
-//		function registerErrorFn(data, status, headers, config) {
-//			//TODO show 500 page
-//			console.error('PageCtrl.activate() get page failure!');
-//		}
-//		
-//	}
+	function activate(state){
+		console.log('PageCtrl.activate() get page name=' + state);
+		vm.state = state;
+		return PageService.get(state).then(getSuccessFn, getErrorFn);
+
+		function getSuccessFn(data, status, headers, config) {
+			// parse the block from page object
+			var page = data.data;
+			vm.blocks = _.indexBy(page.blocks, 'code');
+			
+//			console.log('get returned data from get(), page=%j', vm.blocks);
+//			console.log('get=%j', vm.blocks['home_about']['content']);
+		}
+
+		function getErrorFn(data, status, headers, config) {
+			//TODO show 500 page
+			console.error('PageCtrl.activate() get page failure!');
+		}
+		
+	}
 }]);
