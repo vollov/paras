@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('auth.services', [])
-.constant('api_url_root', 'http://localhost:8000/api/v1')
+angular.module('auth.services', ['cfg'])
 .constant('clientToken', 'ocbl-client-token')
-.factory('AuthService', [ '$http', 'api_url_root', function($http, api_url_root) {
+.factory('AuthService', [ '$http', 'cfgService', function($http, cfgService) {
 
 	var service = {
 			users : [],
@@ -28,11 +27,11 @@ angular.module('auth.services', [])
 	};
 
 	service.register = function(user) {
-		return $http.post(api_url_root + '/register', user);
+		return $http.post(cfgService.getApiUrl() + '/register', user);
 	}
 
 	service.login = function(user) {
-		return $http.post(api_url_root + '/login', user);
+		return $http.post(cfgService.getApiUrl() + '/login', user);
 	};
 
 	service.logout = function() {
