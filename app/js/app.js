@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ocblApp', ['ui.router', 'hc.marked', 'auth', 'page'])
-.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+.config(['$stateProvider','$locationProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
 	$stateProvider.state('home', {
 		url : '/home',
 		templateUrl : 'views/home.html',
@@ -47,7 +47,8 @@ angular.module('ocblApp', ['ui.router', 'hc.marked', 'auth', 'page'])
 			requireLogin: false
 		}
 	});
-  $urlRouterProvider.otherwise('home');
+	$locationProvider.hashPrefix('');
+	$urlRouterProvider.otherwise('home');
 }])
 .config(['markedProvider', function (markedProvider) {
 	markedProvider.setOptions({
